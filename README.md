@@ -1,7 +1,7 @@
 # JIIT Network
 
 ##Team : 
-  > Yugandhar Tripathi
-  > Arpit Pundir
-  > Pooja Pant
-  > Kumar Prateek
+  > Yugandhar Tripathi<br>
+  > Arpit Pundir<br>
+  > Pooja Pant<br>
+  > Kumar Prateek<br>
