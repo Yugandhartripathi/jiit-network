@@ -10,7 +10,6 @@ for(let i=0;i<arr2.length;i++){
 for(let i=0;i<arr3.length;i++){
     arr3[i].classList.add('hideBlocks');
 }
-
 function formType(){
     var x=document.getElementById('dropdownForm');
     console.log(x.value);
