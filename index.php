@@ -2,10 +2,7 @@
 require('connect.php');
 $username='';
 $pass='';
-$err=0;
-if($err==1){
-    echo"Wrong ID or Password,Please try again.";
-}?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,10 +32,6 @@ if($err==1){
                 <a href="/">Forgot Password ?</a>
                 <button type="submit" name="login">Login</button>
                 <button type="submit" name="signup">Sign Up</button>
-                <?php
-                if($err==1){
-                    echo"Wrong ID or Password,Please try again.";
-                }?>
             </div>
         </form>
     </div>
@@ -49,20 +42,18 @@ if($err==1){
         if(isset($_POST["login"])){
             $username=$_POST["username"];
             $pass=$_POST["pass"];
-            $pass_md5=md5($pass);
-            $sql="select * from users where username='$username' and pass='$pass_md5'";
+            $sql="select * from userData where username='$username' and alterPIN='$pass'";
             $res=$conn->query($sql);
             if($res->num_rows!=0){
                 $_SESSION['username']=$username;
                 header('Location: home.php');
-                exit();
             }
             else{
-                $err=1;
+                echo"<center><h3 style='color: red'>Wrong ID or Password please try again!</h1></center>";
             }
         }
         if(isset($_POST["signup"])){
             header("Location: signup.php");
-            exit();
         }
     }
+?>
