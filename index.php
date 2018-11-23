@@ -45,8 +45,9 @@ $pass='';
             $sql="select * from userData where username='$username' and alterPIN='$pass'";
             $res=$conn->query($sql);
             if($res->num_rows!=0){
+                session_start();
                 $_SESSION['username']=$username;
-                header('Location: home.php');
+                header('Location: home.php?username='.$username);
             }
             else{
                 echo"<center><h3 style='color: red'>Wrong ID or Password please try again!</h1></center>";
