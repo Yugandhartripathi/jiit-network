@@ -1,5 +1,5 @@
 body{
-    background: linear-gradient(45deg, #ff0000, #0000ff);;
+    background: linear-gradient(90deg, #ff0000, #0000ff);
     margin:0;
     padding:0;
     color:#fff;
@@ -16,6 +16,7 @@ body{
     left: 50%;
     transform: translate(-50%,-50%);
     box-sizing:border-box;
+    border-radius: 10px;
 }
 
 .image{

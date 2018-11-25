@@ -2,6 +2,7 @@
 require('connect.php');
 $username='';
 $pass='';
+echo "<span style='opacity: 0'>trigger now</span>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,10 +10,10 @@ $pass='';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Network</title>
-    <link rel="stylesheet" type="text/css" href="loginPage.css">
+    <link rel="stylesheet" type="text/css" href="loginPage.css?ver=<?php echo rand(111,999);?>">
 </head>
 <body>
-    <div class="formBox" >
+    <div class="formBox">
         <img src="ultFinal.jpg" alt="logo" class="image">
         <h1 data-text="ENTER JIIT NETWORK">ENTER JIIT NETWORK</h1>
         <form action="index.php" method="POST">
@@ -42,7 +43,8 @@ $pass='';
         if(isset($_POST["login"])){
             $username=$_POST["username"];
             $pass=$_POST["pass"];
-            $sql="select * from userData where username='$username' and alterPIN='$pass'";
+            $pass_md5=md5($pass);
+            $sql="select * from userData where username='$username' and password='$pass_md5'";
             $res=$conn->query($sql);
             if($res->num_rows!=0){
                 session_start();

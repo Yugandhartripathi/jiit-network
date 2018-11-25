@@ -193,6 +193,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	$cpassword=$_POST['cpassword'];
 	$category=$_POST['category'];
 	$alterPin=$_POST['pin'];
+	$profilePic="userDefaultProfile.png";
 	if($username && $email && $password && $cpassword && $category && $alterPin){
 		if($password==$cpassword){
 			$pass_md5=md5($password);
@@ -212,7 +213,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 					$course="IT";
 				}
 				if($fname && $lname && $enrol){
-					$sql="insert into userData(username,password,email,category,alterPIN) values('$username','$pass_md5','$email','$category','$alterPin')";
+					$sql="insert into userData(username,password,email,category,alterPIN,profilePic) values('$username','$pass_md5','$email','$category','$alterPin','$profilePic')";
 					if($conn->query($sql)){
 						$sql1="insert into signupStudent(username,enrol,fname,lname,batch,course,gender) values('$username','$enrol','$fname','$lname','$batch','$course','$gender')";
 						$conn->query($sql1);
@@ -226,7 +227,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 				$tgender=$_POST['tgender'];
 				$dept=$_POST['dept'];
 				if($tfname && $tlname && $tgender && $dept){
-					$sql="insert into userData(username,password,email,category,alterPIN) values('$username','$pass_md5','$email','$category','$alterPin')";
+					$sql="insert into userData(username,password,email,category,alterPIN,profilePic) values('$username','$pass_md5','$email','$category','$alterPin','$profilePic')";
 					if($conn->query($sql)){
 						$sql1="insert into signupTeacher(username,fname,lname,gender,department) values('$username','$tfname','$tlname','$tgender','$dept')";
 						$conn->query($sql1);
@@ -238,7 +239,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 				$hubName=$_POST['hubName'];
 				$yearEST=$_POST['yearEst'];
 				if($hubName && $yearEST){
-					$sql="insert into userData(username,password,email,category,alterPIN) values('$username','$pass_md5','$email','$category','$alterPin')";
+					$sql="insert into userData(username,password,email,category,alterPIN,profilePic) values('$username','$pass_md5','$email','$category','$alterPin','$profilePic')";
 					if($conn->query($sql)){
 						$sql1="insert into signupHub(username,hubName,memberCount,yearEst,description,numPost) values('$username','$hubName',0,'$yearEST',NULL,0)";
 						$conn->query($sql1);
