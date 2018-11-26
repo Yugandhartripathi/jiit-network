@@ -2,55 +2,8 @@
 require("connect.php");
 session_start();
 $guest='';
-if(isset($_GET['username']) && isset($_SESSION['username'])){
-    $user=$_GET['username'];
+if(isset($_SESSION['username'])){
     $username=$_SESSION['username'];
-    $sql="SELECT * from userData where username='$user'";
-    $result=$conn->query($sql);
-    if($result->num_rows==0){
-        header('Location: notFound.php');
-    }
-    else{
-        $row=$result->fetch_assoc();
-        $category=$row['category'];
-        $profilePic=$row['profilePic'];
-        if($user==$username){
-            $guest=0;
-        }
-        else{
-            $guest=1;
-        }
-    }
-    if($category=="studentFields"){
-        $sql1="SELECT * from signupStudent where username='$user'";
-        $res=$conn->query($sql1);
-        $row=$res->fetch_assoc();
-        $enrol=$row['enrol'];
-        $fname=$row['fname'];
-        $lname=$row['lname'];
-        $batch=$row['batch'];
-        $course=$row['course'];
-        $gender=$row['gender'];
-    }
-    else if($category="teacherFields"){
-        $sql1="SELECT * from signupTeacher where username='$user'";
-        $res=$conn->query($sql1);
-        $row=$res->fetch_assoc();
-        $fname=$row['fname'];
-        $lname=$row['lname'];
-        $gender=$row['gender'];
-        $department=$row['department'];
-    }
-    else{
-        $sql1="SELECT * from signupHub where username='$user'";
-        $res=$conn->query($sql1);
-        $row=$res->fetch_assoc();
-        $hubName=$row['hubName'];
-        $memberCount=$row['memberCount'];
-        $yearEst=$row['yearEst'];
-        $description=$row['description'];
-        $numPost=$row['numPost'];
-    }
 }
 else{
     header('Location: index.php');

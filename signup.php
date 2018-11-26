@@ -193,63 +193,98 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	$cpassword=$_POST['cpassword'];
 	$category=$_POST['category'];
 	$alterPin=$_POST['pin'];
-	$profilePic="userDefaultProfile.png";
 	if($username && $email && $password && $cpassword && $category && $alterPin){
-		if($password==$cpassword){
-			$pass_md5=md5($password);
-			if($category=="studentFields"){
-				$fname=$_POST['fname'];
-				$lname=$_POST['lname'];
-				$enrol=$_POST['enrol'];
-				$gender=$_POST['gender-buttons'];
-				$batch=$_POST['batch'];
-				if($batch[0]=='A'){
-					$course="ECE";
-				}
-				else if($batch[0]=='B'){
-					$course="CSE";
+		if(preg_match("/^[a-zA-Z0-9_]*$/",$username)){
+			if(filter_var($email,FILTER_VALIDATE_EMAIL)){
+				if(strlen($alterPin)==6 && preg_match("/^[0-9]*$/",$alterPin)){
+					if($password==$cpassword){
+						$pass_md5=md5($password);
+						if($category=="studentFields"){
+							$fname=$_POST['fname'];
+							$lname=$_POST['lname'];
+							$enrol=$_POST['enrol'];
+							$gender=$_POST['gender-buttons'];
+							$batch=$_POST['batch'];
+							if($batch[0]=='A'){
+								$course="ECE";
+							}
+							else if($batch[0]=='B'){
+								$course="CSE";
+							}
+							else{
+								$course="IT";
+							}
+							if($fname && $lname && $enrol){
+								if(preg_match("/^[a-zA-Z]*$/",$fname) && preg_match("/^[a-zA-Z]*$/",$lname)){
+									$sql="insert into userData(username,password,email,category,alterPIN) values('$username','$pass_md5','$email','$category','$alterPin')";
+									$sql2="insert into profileData(username,profilePic) values ('$username','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5k0pKpVdogRyyt06oALOEU9_cdmBCTifjoGQxnePlNbnNVzrT')";
+									if($conn->query($sql)){
+										$conn->query($sql2);
+										$sql1="insert into signupStudent(username,enrol,fname,lname,batch,course,gender) values('$username','$enrol','$fname','$lname','$batch','$course','$gender')";
+										$conn->query($sql1);
+										header('Location: index.php');
+									}
+								}
+								else{
+									echo"Name can only consist of alphabets";
+								}
+							}
+						}
+						else if($category=="teacherFields"){
+							$tfname=$_POST['tfname'];
+							$tlname=$_POST['tlname'];
+							$tgender=$_POST['tgender'];
+							$dept=$_POST['dept'];
+							if($tfname && $tlname && $tgender && $dept){
+								if(preg_match("/^[a-zA-Z]*$/",$tfname) && preg_match("/^[a-zA-Z]*$/",$tlname)){
+									$sql="insert into userData(username,password,email,category,alterPIN) values('$username','$pass_md5','$email','$category','$alterPin')";
+									$sql2="insert into profileData(username,profilePic) values ('$username','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5k0pKpVdogRyyt06oALOEU9_cdmBCTifjoGQxnePlNbnNVzrT')";
+									if($conn->query($sql)){
+										$conn->query($sql2);
+										$sql1="insert into signupTeacher(username,fname,lname,gender,department) values('$username','$tfname','$tlname','$tgender','$dept')";
+										$conn->query($sql1);
+										header('Location: index.php');
+									}
+								}
+								else{
+									echo"Name can only consist of alphabets";
+								}
+							}
+						}
+						else{
+							$hubName=$_POST['hubName'];
+							$yearEST=$_POST['yearEst'];
+							if($hubName && $yearEST){
+								if(preg_match("/^[a-zA-Z]*$/",$hubName)){
+									$sql="insert into userData(username,password,email,category,alterPIN) values('$username','$pass_md5','$email','$category','$alterPin')";
+									$sql2="insert into profileData(username,profilePic) values ('$username','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5k0pKpVdogRyyt06oALOEU9_cdmBCTifjoGQxnePlNbnNVzrT')";
+									if($conn->query($sql)){
+										$conn->query($sql2);
+										$sql1="insert into signupHub(username,hubName,yearEst) values('$username','$hubName','$yearEST')";
+										$conn->query($sql1);
+										header('Location: index.php');
+									}
+								}
+								else{
+									echo"Name can only consist of alphabets";
+								}
+							}
+						}
+					}
+					else{
+						echo"passwords don't match";
+					}
 				}
 				else{
-					$course="IT";
-				}
-				if($fname && $lname && $enrol){
-					$sql="insert into userData(username,password,email,category,alterPIN,profilePic) values('$username','$pass_md5','$email','$category','$alterPin','$profilePic')";
-					if($conn->query($sql)){
-						$sql1="insert into signupStudent(username,enrol,fname,lname,batch,course,gender) values('$username','$enrol','$fname','$lname','$batch','$course','$gender')";
-						$conn->query($sql1);
-						header('Location: index.php');
-					}
-				}
-			}
-			else if($category=="teacherFields"){
-				$tfname=$_POST['tfname'];
-				$tlname=$_POST['tlname'];
-				$tgender=$_POST['tgender'];
-				$dept=$_POST['dept'];
-				if($tfname && $tlname && $tgender && $dept){
-					$sql="insert into userData(username,password,email,category,alterPIN,profilePic) values('$username','$pass_md5','$email','$category','$alterPin','$profilePic')";
-					if($conn->query($sql)){
-						$sql1="insert into signupTeacher(username,fname,lname,gender,department) values('$username','$tfname','$tlname','$tgender','$dept')";
-						$conn->query($sql1);
-						header('Location: index.php');
-					}
+					echo"alternate pin should have numeric value and length six"; 
 				}
 			}
 			else{
-				$hubName=$_POST['hubName'];
-				$yearEST=$_POST['yearEst'];
-				if($hubName && $yearEST){
-					$sql="insert into userData(username,password,email,category,alterPIN,profilePic) values('$username','$pass_md5','$email','$category','$alterPin','$profilePic')";
-					if($conn->query($sql)){
-						$sql1="insert into signupHub(username,hubName,memberCount,yearEst,description,numPost) values('$username','$hubName',0,'$yearEST',NULL,0)";
-						$conn->query($sql1);
-						header('Location: index.php');
-					}
-				}
+				echo"enter correct email address";
 			}
 		}
 		else{
-			echo"passwords don't match";
+			echo"username can only have a-z,A-Z,_,0-9";
 		}
 	}
 	else{

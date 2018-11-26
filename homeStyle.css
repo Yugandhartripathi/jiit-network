@@ -1,18 +1,27 @@
 .container{
     width: 70vw;
-    position: relative;
-    top: 50px;
     margin: 0 auto;
+    margin-top: 60px;
     background: black;
     height: 100vw;
 }
 .newPost{
     width: 70%;
-    margin: 0 auto;
+    margin: 10px auto;
     background: white;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 30px;
+}
+.savedPost{
+    width: 70%;
+    margin: 10px auto;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
     align-items: flex-start;
     padding: 10px 30px;
 }
@@ -47,6 +56,7 @@ button {
     margin: 0;
     margin-right: 10px;
     border: 0px solid;
+    cursor: pointer;
 }
 textarea{
     width: 100%;
@@ -56,4 +66,42 @@ textarea{
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+.votes{
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#up{
+    width: 100%;
+}
+#down{
+    width: 100%;
+}
+#vote{
+    font-size: 1.5em;
+}
+.postDetail{
+    font-size: 2em;
+    margin: auto auto;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    color: black;
+}
+.postDetail a{
+    text-decoration: none;
+    color: #386496;
+    transition: color 0.2s ease-out;
+    font-weight: 600;
+}
+.postDetail a:hover{
+    color: #0f0;
+}
+#titleSpan a{
+    text-transform: uppercase;
+}
+#authorLink{
+    align-self: flex-end;
 }
