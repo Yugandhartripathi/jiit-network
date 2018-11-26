@@ -2,6 +2,13 @@
 require('connect.php');
 $username='';
 $pass='';
+$resetSuccess=0;
+if(isset($_GET['success'])){
+    $resetSuccess=1;
+}
+if($resetSuccess==1){
+    echo"<center><h3 style='color: red'>Password Successfully Changed!</h1></center>";
+}
 echo "<span style='opacity: 0'>trigger now</span>";
 ?>
 <!DOCTYPE html>
@@ -30,7 +37,7 @@ echo "<span style='opacity: 0'>trigger now</span>";
                 </label>
             </div>
             <div class="inputBox">
-                <a href="/">Forgot Password ?</a>
+                <a href="forgotPassword.php">Forgot Password ?</a>
                 <button type="submit" name="login">Login</button>
                 <button type="submit" name="signup">Sign Up</button>
             </div>
