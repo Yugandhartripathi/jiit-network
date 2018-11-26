@@ -1,0 +1,11 @@
+body{
+    background: linear-gradient(90deg, #ff0000, #0000ff);
+    margin:0;
+    padding:0;
+    color:#f00;
+    font-family: sans-serif;
+}
+a{
+    font-size: 2em;
+    color: red;
+}
