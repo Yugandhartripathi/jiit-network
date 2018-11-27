@@ -3,7 +3,7 @@
     margin: 0 auto;
     margin-top: 60px;
     background: black;
-    height: 100vw;
+    min-height: 100vh;
 }
 .newPost{
     width: 70%;
@@ -103,5 +103,6 @@ textarea{
     text-transform: uppercase;
 }
 #authorLink{
+    margin-top: 20px;
     align-self: flex-end;
 }

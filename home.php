@@ -23,9 +23,22 @@
     for($i=0;$i<$res->num_rows;$i++){
         $row=$res->fetch_assoc();
         $titleTempPost=$row['title'];
-        $authorTempPost=$row['creator'];
+        $authorUserName=$row['creator'];
         $postID=$row['postID'];
         $vote=$row['upvotes']-$row['downVotes'];
+        $sql9="select * from userData where username='$authorUserName'";
+        $res9=$conn->query($sql9);
+        $row9=$res9->fetch_assoc();
+        $categoryAuthorTempPost=$row9['category'];
+        if($categoryAuthorTempPost=="studentFields"){
+            $shortCate="S";
+        }
+        else if($categoryAuthorTempPost=="teacherFields"){
+            $shortCate="T";
+        }
+        else{
+            $shortCate="H";
+        }
     ?>
     <div class="savedPost">
         <?php
@@ -39,7 +52,7 @@
             Title:&nbsp;<a href='post.php?postID=$postID' id='titleLink'>$titleTempPost</a>
             </div>
             <div id='authorLink'>
-            Author:&nbsp;<a href='profile.php?username=$authorTempPost'>$authorTempPost</a>
+            Author:&nbsp;<a href='profile.php?username=$authorUserName'>($shortCate)$authorUserName</a>
             </div>
             </div>";
         ?>
@@ -65,6 +78,10 @@ include("footer.php");
                 $sql2="insert into post(creator,title,body) values('$username','$title','$body')";
             }
             if($conn->query($sql2)){
+                $sql15="select numPosts from profileData where username='$username'";
+                $res15=$conn->query($sql15);
+                $row15=$res15->fetch_assoc();
+                $newNumPosts=$row15['numPosts']+1;
                 $sql3="update profileData set numPosts='$newNumPosts' where username='$username'";
                 if($conn->query($sql3)){
                     header("Location: home.php");
@@ -103,9 +120,9 @@ include("footer.php");
                     }
                     $sql4="update post set upvotes='$newUpVote' where postID='$postVotedOn'";
                     $sql5="update post set downVotes='$newDownVote' where postID='$postVotedOn'";
-                    if($conn->query($sql4) && $conn->query($sql5)){
-                        header("Location: home.php");
-                    }
+                    $conn->query($sql4);
+                    $conn->query($sql5);
+                    header("Location: home.php");
                 }
             }
         }

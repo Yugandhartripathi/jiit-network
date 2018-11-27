@@ -1,16 +1,16 @@
 .containerProfile{
-	width: 80vw;
+	width: 60vw;
     margin: 0 auto;
     margin-top: 60px;
 	background: white;
-	height: 100vw;
+	min-height: 100vh;
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
 }
 .profilePicPart{
-	width: 25%;
-	height: 100%;
+	width: 35%;
+	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -92,7 +92,7 @@
 	font-size: 1.5em;
 }
 .rightSideArea{
-	width: 75%;
+	width: 65%;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
