@@ -154,10 +154,16 @@
             }
         }
         if(isset($_POST['submitFollow'])){
-            $newFollowing=$numFollowing+1;
-            $newFollower=$numFollower+1;
+            $sql11="select * from follow where follower='$username'";
+            $res11=$conn->query($sql11);
+            $numFollowing=$res11->num_rows;
+            $sql12="select * from follow where following='$user'";
+            $res12=$conn->query($sql12);
+            $numFollower=$res12->num_rows;
             $sql6="insert into follow(follower,following) values('$username','$user')";
             if($conn->query($sql6)){
+                $newFollowing=$numFollowing+1;
+                $newFollower=$numFollower+1;
                 $sql4="update profileData set numFollower='$newFollower' where username='$user'";
                 $conn->query($sql4);
                 $sql5="update profileData set numFollowing='$newFollowing' where username='$username'";
@@ -166,10 +172,16 @@
             }
         }
         if(isset($_POST['submitUnFollow'])){
-            $newFollowing=$numFollowing-1;
-            $newFollower=$numFollower-1;
+            $sql11="select * from follow where follower='$username'";
+            $res11=$conn->query($sql11);
+            $numFollowing=$res11->num_rows;
+            $sql12="select * from follow where following='$user'";
+            $res12=$conn->query($sql12);
+            $numFollower=$res12->num_rows;
             $sql6="delete from follow where follower='$username' and following='$user'";
             if($conn->query($sql6)){
+                $newFollowing=$numFollowing-1;
+                $newFollower=$numFollower-1;
                 $sql4="update profileData set numFollower='$newFollower' where username='$user'";
                 $conn->query($sql4);
                 $sql5="update profileData set numFollowing='$newFollowing' where username='$username'";

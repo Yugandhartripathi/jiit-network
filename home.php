@@ -11,7 +11,7 @@
             <input type="text" name="title" id="title" placeholder="Post Title" autofocus required><br>
             <textarea name="postBody" rows="5" form="postForm" placeholder="Content goes here..."></textarea><br>
             <div id="subForm">
-            <button type="button" onclick="enterLink()">Attachment</button>
+            <button type="button" onclick="enterLink()">Attach</button>
             <input type="text" name="link" id="link" placeholder="paste link for attachment here">
             <button type="submit" name="submit" value="POST" id="submit">POST</button>
             </div>

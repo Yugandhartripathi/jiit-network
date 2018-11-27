@@ -255,7 +255,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 							$hubName=$_POST['hubName'];
 							$yearEST=$_POST['yearEst'];
 							if($hubName && $yearEST){
-								if(preg_match("/^[a-zA-Z]*$/",$hubName)){
+								if(preg_match("/^[a-zA-Z ]*$/",$hubName)){
 									$sql="insert into userData(username,password,email,category,alterPIN) values('$username','$pass_md5','$email','$category','$alterPin')";
 									$sql2="insert into profileData(username,profilePic) values ('$username','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5k0pKpVdogRyyt06oALOEU9_cdmBCTifjoGQxnePlNbnNVzrT')";
 									if($conn->query($sql)){
